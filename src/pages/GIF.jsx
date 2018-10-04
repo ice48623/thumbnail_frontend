@@ -1,43 +1,56 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
-class AllVideo extends Component {
+class GIF extends Component {
 
   state = {
-    keyword: ""
+    bucket: "",
+    objects: []
   }
 
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    console.log("Did mount")
+    axios.get(`http://localhost:8080/demo?list`)
       .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
+        const vid = res.data.objects
+        const bucket_name = res.data.name
+        this.setState({
+          bucket: bucket_name,
+          objects: vid
+        })
       })
   }
 
   render() {
+    const bucket = this.props.match.params.bucket
+    const videos = this.state.objects.filter((object) => {
+      return object.name.split(".")[1] === "gif"
+    })
     return (
       <div>
         <div>
           <AppBar position="static" color="default">
             <Toolbar>
               <Typography variant="title" color="inherit">
-                Photos
+                {bucket}
               </Typography>
             </Toolbar>
           </AppBar>
         </div>
         <div>
-          <h3>ID: {this.props.match.params.bucket}</h3>
+          <ul>
+            {
+              videos.map(video => <li>{video.name}</li>)
+            }
+          </ul>
         </div>
       </div>
     )
   }
 }
 
-export default AllVideo;
+export default GIF;
