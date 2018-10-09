@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import '../assets/Buckets.css'
+import '../assets/Buckets.css';
+import Button from '@material-ui/core/Button'
 
 class Buckets extends Component {
 
@@ -24,9 +25,13 @@ class Buckets extends Component {
             })
     }
 
-    handleListItemClick(bucketName) {
-        this.props.history.push("/"+bucketName+"/show_all_gifs")
+    handleVideoButtonClick(bucketName) {
+        this.props.history.push("/"+bucketName+"/show_all_videos")
     };
+
+    handleGIFClick(bucketName) {
+        this.props.history.push("/"+bucketName+"/show_all_gifs")
+    }
 
     render() {
         return (
@@ -43,12 +48,24 @@ class Buckets extends Component {
                 <div className="content">
                     <List component="nav">
                         {this.state.buckets.map(bucket => (
-                            <ListItem button
+                            <ListItem button={false}
                                       key={bucket}
-                                      onClick={() => this.handleListItemClick(bucket)}
                                       className="list"
                             >
                                 <ListItemText primary={bucket}/>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => this.handleVideoButtonClick(bucket)}
+                                    classes="button"
+                                >
+                                    Video
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => this.handleGIFClick(bucket)}
+                                >
+                                    GIF
+                                </Button>
                             </ListItem>
                         ))}
                     </List>
