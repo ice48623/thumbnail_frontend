@@ -34,9 +34,11 @@ class Videos extends Component {
     }
 
     handleGenerateAll() {
-        this.state.videos.forEach(video => {
-            this.handleGenerate(video.name);
-        })
+        const url = "http://0.0.0.0:5000/addAll?bucket=" + this.state.bucket;
+        axios.post(url)
+            .then(res => {
+                console.log(res);
+            })
     }
 
     handleGenerate(videoName) {

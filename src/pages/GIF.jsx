@@ -14,17 +14,22 @@ class GIF extends Component {
 
     state = {
         bucket: "",
-        objects: []
-    }
+        objects: [],
+        gifs: []
+    };
 
     componentDidMount() {
         const bucket = this.props.match.params.bucket;
-        this.setState({bucket})
+        this.setState({bucket});
         axios.get("http://localhost:8080/" + bucket + "?list")
             .then(res => {
-                const vid = res.data.objects
+                const objects = res.data.objects;
+                const gifs = objects.filter((object) => {
+                    return object.name.split(".")[1] === "gif"
+                });
                 this.setState({
-                  objects: vid
+                    objects: objects,
+                    gifs: gifs
             })
         })
     }
@@ -58,34 +63,6 @@ class GIF extends Component {
     }
 
     render() {
-        const styles = theme => ({
-            card: {
-                maxWidth: "400",
-            },
-            media: {
-                // ⚠️ object-fit is not supported by IE11.
-                objectFit: 'cover',
-            },
-            root: {
-                display: 'flex',
-                // flexWrap: 'wrap',
-                justifyContent: 'space-around',
-                overflow: 'hidden',
-                width: '80%'
-                // backgroundColor: theme.palette.background.paper,
-            },
-            gridList: {
-                maxWidth: 400,
-            },
-            content: {
-                flex: '1 0 auto',
-                width: 30,
-            },
-        });
-
-        const filtered = this.state.objects.filter((object) => {
-            return object.name.split(".")[1] === "gif"
-        })
 
         return (
             <div>
@@ -101,18 +78,17 @@ class GIF extends Component {
                 <div>
 
                     <GridList cellHeight={500} cols={3}>
-                        {filtered.map(tile => (
-                            <Card className={styles.card} key={tile.name}>
-                                <CardContent className={styles.content}>
+                        {this.state.gifs.map(tile => (
+                            <Card key={tile.name}>
+                                <CardContent>
                                     <CardMedia
                                         component="img"
-                                        className={styles.media}
                                         height="320"
                                         image={"http://localhost:8080/" + this.state.bucket + "/" + tile.name}
                                         title={tile.name}
                                     />
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                        <Typography gutterBottom variant="title" component="h2">
                                             {tile.name}
                                         </Typography>
                                     </CardContent>
@@ -121,7 +97,7 @@ class GIF extends Component {
                                     <Button id={tile.name} size="small" color="primary" onClick={() => this.handleDownload(tile.name)}>
                                         Download
                                     </Button>
-                                    <Button size="small" color="primary" onClick={() => this.handleDelete()}>
+                                    <Button size="small" color="primary" onClick={() => this.handleDelete(tile.name)}>
                                         Delete
                                     </Button>
                                 </CardActions>
