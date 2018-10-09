@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Videos from './pages/Videos'
 import GIF from './pages/GIF'
+import Buckets from './pages/Buckets'
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
                     <div>
                         <Route exact path="/:bucket/show_all_videos" component={Videos}/>
                         <Route exact path="/:bucket/show_all_gifs" component={GIF}/>
+                        <Route exact path="/" component={Buckets}/>
                     </div>
                 </Router>
             </div>

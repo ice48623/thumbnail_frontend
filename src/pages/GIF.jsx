@@ -23,7 +23,6 @@ class GIF extends Component {
         axios.get("http://localhost:8080/" + bucket + "?list")
             .then(res => {
                 const vid = res.data.objects
-                // const bucket_name = res.data.name
                 this.setState({
                   objects: vid
             })
@@ -59,7 +58,7 @@ class GIF extends Component {
     }
 
     render() {
-        const styles = {
+        const styles = theme => ({
             card: {
                 maxWidth: "400",
             },
@@ -82,7 +81,7 @@ class GIF extends Component {
                 flex: '1 0 auto',
                 width: 30,
             },
-        };
+        });
 
         const filtered = this.state.objects.filter((object) => {
             return object.name.split(".")[1] === "gif"
@@ -90,46 +89,46 @@ class GIF extends Component {
 
         return (
             <div>
-            <div>
-                <AppBar position="static" color="default">
-                    <Toolbar>
-                        <Typography variant="title" color="inherit">
-                            {this.state.bucket}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </div>
-            <div>
+                <div>
+                    <AppBar position="static" color="default">
+                        <Toolbar>
+                            <Typography variant="title" color="inherit">
+                                {this.state.bucket}
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+                <div>
 
-                <GridList cellHeight={500} cols={3}>
-                    {filtered.map(tile => (
-                        <Card className={styles.card} key={tile.name}>
-                            <CardContent className={styles.content}>
-                                <CardMedia
-                                    component="img"
-                                    className={styles.media}
-                                    height="320"
-                                    image={"http://localhost:8080/" + this.state.bucket + "/" + tile.name}
-                                    title={tile.name}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {tile.name}
-                                    </Typography>
+                    <GridList cellHeight={500} cols={3}>
+                        {filtered.map(tile => (
+                            <Card className={styles.card} key={tile.name}>
+                                <CardContent className={styles.content}>
+                                    <CardMedia
+                                        component="img"
+                                        className={styles.media}
+                                        height="320"
+                                        image={"http://localhost:8080/" + this.state.bucket + "/" + tile.name}
+                                        title={tile.name}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {tile.name}
+                                        </Typography>
+                                    </CardContent>
                                 </CardContent>
-                            </CardContent>
-                            <CardActions>
-                                <Button id={tile.name} size="small" color="primary" onClick={() => this.handleDownload(tile.name)}>
-                                    Download
-                                </Button>
-                                <Button size="small" color="primary" onClick={() => this.handleDelete()}>
-                                    Delete
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    ))}
-                </GridList>
-            </div>
+                                <CardActions>
+                                    <Button id={tile.name} size="small" color="primary" onClick={() => this.handleDownload(tile.name)}>
+                                        Download
+                                    </Button>
+                                    <Button size="small" color="primary" onClick={() => this.handleDelete()}>
+                                        Delete
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        ))}
+                    </GridList>
+                </div>
             </div>
         )
     }
