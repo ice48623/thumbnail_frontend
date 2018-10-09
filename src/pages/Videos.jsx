@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +12,6 @@ class Videos extends Component {
   }
 
   componentDidMount() {
-    console.log("Did mount")
     axios.get(`http://localhost:8080/demo?list`)
       .then(res => {
         const vid = res.data.objects
