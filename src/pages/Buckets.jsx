@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import '../assets/Buckets.css'
 
 class Buckets extends Component {
 
@@ -39,12 +40,13 @@ class Buckets extends Component {
                         </Toolbar>
                     </AppBar>
                 </div>
-                <div>
+                <div className="content">
                     <List component="nav">
                         {this.state.buckets.map(bucket => (
                             <ListItem button
                                       key={bucket}
                                       onClick={() => this.handleListItemClick(bucket)}
+                                      className="list"
                             >
                                 <ListItemText primary={bucket}/>
                             </ListItem>
