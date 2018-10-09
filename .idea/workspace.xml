@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e4f3cb4-4591-4fbe-87c2-d2f92bd21476" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/pages/GIF.jsx" afterPath="$PROJECT_DIR$/src/pages/GIF.jsx" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Videos.jsx" afterPath="$PROJECT_DIR$/src/pages/Videos.jsx" />
-    </list>
+    <list default="true" id="2e4f3cb4-4591-4fbe-87c2-d2f92bd21476" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -192,12 +189,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1539062062014</updated>
-      <workItem from="1539062064655" duration="15384000" />
+      <workItem from="1539062064655" duration="15607000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15384000" />
+    <option name="totallyTimeSpent" value="15607000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="979" extended-state="6" />
